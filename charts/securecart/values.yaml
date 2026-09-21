@@ -1,0 +1,20 @@
+image:
+  repository: REPLACE_ME.dkr.ecr.us-east-1.amazonaws.com/securecart
+  tag: "bootstrap"
+  pullPolicy: IfNotPresent
+replicaCount: 1
+service: { type: ClusterIP, port: 80 }
+resources:
+  requests: { cpu: 100m, memory: 256Mi }
+  limits: { cpu: 500m, memory: 768Mi }
+postgres:
+  image: postgres:17-alpine
+  storage: 10Gi
+  username: securecart
+  database: securecart
+vault:
+  enabled: false
+  role: securecart
+  secretPath: kv/data/securecart
+bootstrapSecretName: securecart-app-bootstrap
+networkPolicy: { enabled: true }

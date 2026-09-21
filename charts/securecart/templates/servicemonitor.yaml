@@ -1,0 +1,6 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata: { name: securecart, namespace: securecart, labels: { release: kube-prometheus-stack } }
+spec:
+  selector: { matchLabels: { app.kubernetes.io/name: securecart } }
+  endpoints: [{ port: http, path: /actuator/prometheus, interval: 30s }]

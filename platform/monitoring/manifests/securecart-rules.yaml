@@ -1,0 +1,12 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata: { name: securecart-rules, namespace: monitoring, labels: { release: kube-prometheus-stack } }
+spec:
+  groups:
+    - name: securecart
+      rules:
+        - alert: SecureCartTargetDown
+          expr: up{job=~".*securecart.*"} == 0
+          for: 2m
+          labels: { severity: warning }
+          annotations: { summary: SecureCart Prometheus target is down }

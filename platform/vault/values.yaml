@@ -1,0 +1,5 @@
+server:
+  dev: { enabled: false }
+  standalone: { enabled: true }
+  dataStorage: { enabled: true, size: 5Gi, storageClass: gp3 }
+injector: { enabled: true }

@@ -1,0 +1,9 @@
+driver:
+  kind: modern_ebpf
+
+falcosidekick:
+  enabled: true
+  config:
+    existingSecret: falcosidekick-config
+    slack:
+      minimumpriority: warning

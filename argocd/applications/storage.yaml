@@ -1,0 +1,8 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata: { name: storage, namespace: argocd }
+spec:
+  project: default
+  source: { repoURL: https://github.com/REPLACE_ME/securecart-gitops.git, targetRevision: main, path: platform/storage, directory: { recurse: true } }
+  destination: { server: https://kubernetes.default.svc, namespace: kube-system }
+  syncPolicy: { automated: { prune: true, selfHeal: true } }

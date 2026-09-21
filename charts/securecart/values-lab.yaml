@@ -1,0 +1,5 @@
+image:
+  repository: REPLACE_ME.dkr.ecr.us-east-1.amazonaws.com/securecart
+  tag: "bootstrap"
+replicaCount: 1
+vault: { enabled: false }

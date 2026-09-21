@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: securecart
+  namespace: securecart
+  labels: { app.kubernetes.io/name: securecart }
+spec:
+  selector: { app.kubernetes.io/name: securecart }
+  ports:
+    - { name: http, port: {{ .Values.service.port }}, targetPort: http }
+  type: {{ .Values.service.type }}

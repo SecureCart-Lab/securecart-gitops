@@ -1,0 +1,22 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata: { name: securecart-baseline }
+spec:
+  validationFailureAction: Enforce
+  background: true
+  rules:
+    - name: require-non-root
+      match: { any: [{ resources: { kinds: [Pod], namespaces: [securecart] } }] }
+      validate:
+        message: Containers must run as non-root.
+        pattern: { spec: { containers: [{ securityContext: { runAsNonRoot: true } }] } }
+    - name: require-resources
+      match: { any: [{ resources: { kinds: [Pod], namespaces: [securecart] } }] }
+      validate:
+        message: CPU and memory requests/limits are required.
+        pattern:
+          spec:
+            containers:
+              - resources:
+                  requests: { cpu: "?*", memory: "?*" }
+                  limits: { cpu: "?*", memory: "?*" }
